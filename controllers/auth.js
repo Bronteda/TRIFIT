@@ -1,0 +1,94 @@
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+
+//models
+const User = require("../models/user.js");
+
+//Get the sign up page
+router.get("/sign-up", (req, res) => {
+  res.render("auth/sign-up.ejs", {
+    currentPage: "sign-up",
+    user: req.user || null,
+  });
+});
+
+//Create the user after sign up
+router.post("/sign-up", async (req, res) => {
+  try {
+    //check if user already exists
+    const userInDatabase = await User.findOne({ username: req.body.username });
+    if (userInDatabase) {
+      return res.send("User already exists, Please go to Sign in page");
+    }
+
+    //Password matches confirm password
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.send("Password and confirm password do not match");
+    }
+
+    //encrypt password
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
+    req.body.password = hashPassword;
+
+    // All ready to create the new user!
+    await User.create(req.body);
+
+    res.redirect("/auth/sign-in?newUser=true");
+  } catch (e) {
+    console.log("Cannot sign up", e);
+    res.status(500).send("Cannot sign user up");
+  }
+});
+
+//sign in page
+router.get("/sign-in", (req, res) => {
+  res.render("auth/sign-in.ejs", {
+    newUser: req.query.newUser || false,
+    currentPage: "sign-in",
+    user: req.user || null,
+  });
+});
+
+//signing the user in
+router.post("/sign-in", async (req, res) => {
+  try {
+    //check user exists in db
+    const userInDatabase = await User.findOne({ username: req.body.username });
+    if (!userInDatabase) {
+      return res.send("Login failed. Please try again.");
+    }
+
+    //check if the password is correct
+    const validPassword = bcrypt.compareSync(
+      req.body.password,
+      userInDatabase.password
+    );
+
+    if (!validPassword) {
+      return res.send("Login failed. Please try again.");
+    }
+
+    // There is a user AND they had the correct password. Time to make a session!
+    // Avoid storing the password, even in hashed format, in the session
+    // If there is other data you want to save to `req.session.user`, do so here!
+    req.session.user = {
+      email: userInDatabase.email,
+      username: userInDatabase.username,
+      _id: userInDatabase._id,
+    };
+
+    res.redirect("/");
+  } catch (e) {
+    console.log("Cannot sign in", e);
+    res.status(500).send("Cannot sign user in");
+  }
+});
+
+//Sign Out
+router.get("/sign-out", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
+module.exports = router;

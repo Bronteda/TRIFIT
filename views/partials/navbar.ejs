@@ -1,0 +1,52 @@
+<nav
+  class="navbar trifit-navbar px-4 py-3"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div
+    class="navbar-menu is-active"
+    style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <!-- Left: Home + user links -->
+    <div class="navbar-start" style="flex: 1">
+      <a class="navbar-item has-text-weight-bold trifit-nav-link" href="/"
+        >Home</a
+      >
+
+      <% if (user) { %>
+      <a class="navbar-item trifit-nav-link" href="/activities"
+        >My Activities</a
+      >
+      <a class="navbar-item trifit-nav-link" href="/training">Training Plan</a>
+      <a class="navbar-item trifit-nav-link" href="/dashboard">Dashboard</a>
+      <% } %>
+    </div>
+
+    <!-- Center: TriFit Logo (Icons + Name) -->
+    <div class="trifit-logo-wrap">
+      <img
+        src="/images/trifit-icon.png"
+        alt="TriFit Symbols"
+        class="trifit-icon"
+      />
+      <span class="trifit-text">TRIFIT</span>
+    </div>
+
+    <!-- Right: Remaining links -->
+    <div class="navbar-end" style="flex: 1; justify-content: flex-end">
+      <% if (user) { %>
+      <a class="navbar-item trifit-nav-link" href="/community">Community</a>
+      <a class="navbar-item trifit-nav-link" href="/auth/sign-out">Sign Out</a>
+      <% } else { %> <% if (currentPage !== '/auth/sign-in') { %>
+      <a class="navbar-item trifit-nav-link" href="/auth/sign-in">Sign In</a>
+      <% } %> <% if (currentPage !== '/auth/sign-up') { %>
+      <a class="navbar-item trifit-nav-link" href="/auth/sign-up">Sign Up</a>
+      <% } %> <% } %>
+    </div>
+  </div>
+</nav>

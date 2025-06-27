@@ -1,0 +1,106 @@
+/* --------------------------
+   Global Styles
+--------------------------- */
+body {
+  background-color: #0d1f2d; /* Deep navy */
+  font-family: "Poppins", sans-serif;
+}
+
+input.input {
+  font-family: "Poppins", sans-serif;
+}
+
+/* --------------------------
+   Navbar Styling
+--------------------------- */
+
+/* Navbar container */
+.navbar.trifit-navbar {
+  background-color: #0d1f2d !important;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* All navbar items */
+.navbar.trifit-navbar .navbar-item {
+  color: #efebd6 !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Hover effect for nav items */
+.navbar.trifit-navbar .navbar-item:hover {
+  background-color: #0077c8 !important;
+  color: #ffffff !important;
+}
+
+/* Optional for titles inside nav (not used right now) */
+.navbar.trifit-navbar .title {
+  color: #f2f2f2;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  margin: 0 auto;
+}
+
+/* --------------------------
+   TriFit Branding
+--------------------------- */
+
+/* Logo icons */
+.trifit-icon {
+  height: 65px;
+  transform: scale(0.8);
+  transform-origin: center;
+  width: auto;
+  object-fit: contain;
+}
+
+/* "TRIFIT" name styling */
+.trifit-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: #efebd6;
+  letter-spacing: 1.5px;
+}
+
+/* Flex layout for icon + text */
+.trifit-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  gap: 12px;
+}
+
+/* Reduce padding on navbar logo wrapper */
+.navbar-item.trifit-logo-wrap {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* --------------------------
+   Nav Link Styling
+--------------------------- */
+.trifit-nav-link {
+  color: #efebd6;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.trifit-nav-link:hover {
+  background-color: #2196f3;
+  color: white !important;
+}
+
+/* --------------------------
+   Responsive adjustments
+--------------------------- */
+@media (max-width: 768px) {
+  .trifit-icon {
+    height: 50px;
+  }
+
+  .trifit-text {
+    font-size: 2rem;
+  }
+}

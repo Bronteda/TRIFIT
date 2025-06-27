@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-4-widescreen">
+            <div class="box has-background-white-bis">
+              <h1
+                class="title is-3 has-text-centered has-text-weight-bold"
+                style="color: #0d1f2d"
+              >
+                Join TRIFIT
+              </h1>
+
+              <form action="/auth/sign-up" method="POST">
+                <div class="field">
+                  <label class="label" for="email">Email Address</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="username">Username</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="Choose a username"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="password">Password</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Create a password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="confirmPassword"
+                    >Confirm Password</label
+                  >
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="Confirm your password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="field mt-5">
+                  <div class="control">
+                    <button
+                      type="submit"
+                      class="button is-fullwidth has-text-weight-bold"
+                      style="
+                        background-color: #4caf50;
+                        color: white;
+                        border: none;
+                      "
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <p class="has-text-centered mt-4">
+                Already have an account?
+                <a href="/auth/sign-in" class="has-text-link">Sign In</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
