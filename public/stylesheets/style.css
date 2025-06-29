@@ -23,6 +23,7 @@ input.input {
 /* All navbar items */
 .navbar.trifit-navbar .navbar-item {
   color: #efebd6 !important;
+  /* 7bcea0 */
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -31,14 +32,6 @@ input.input {
 .navbar.trifit-navbar .navbar-item:hover {
   background-color: #0077c8 !important;
   color: #ffffff !important;
-}
-
-/* Optional for titles inside nav (not used right now) */
-.navbar.trifit-navbar .title {
-  color: #f2f2f2;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  margin: 0 auto;
 }
 
 /* --------------------------
@@ -91,6 +84,80 @@ input.input {
   background-color: #2196f3;
   color: white !important;
 }
+
+/* --------------------------
+   Activities Link Styling
+--------------------------- */
+.activity-card-link {
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: block;
+  border-radius: 8px;
+}
+
+.activity-card-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Switch Styling - for completed toggle*/
+
+.switch input[type="checkbox"] {
+  display: none;
+}
+
+.switch input:checked + .check {
+  background-color: #4CAF50; /* your green */
+}
+
+.switch .check {
+  border-radius: 34px;
+  background-color: #ccc;
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.switch .check::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.switch input:checked + .check::before {
+  transform: translateX(24px);
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.low-tag {
+  background-color: #6fcf97;
+  color: #fff;
+}
+
+.moderate-tag {
+  background-color: #f2c94c;
+  color: #000;
+}
+
+.vigorous-tag {
+  background-color: #eb5757;
+  color: #fff;
+}
+
 
 /* --------------------------
    Responsive adjustments

@@ -1,0 +1,163 @@
+const express = require("express");
+
+const router = express.Router();
+
+//import our models
+const Activity = require("../models/activity");
+
+//import our utils - helper functions
+const {
+  totalMinutesCalculated,
+  separateDuration,
+  formatDuration,
+} = require("../utils/format-duration");
+
+//Home page of Activities
+router.get("/", async (req, res) => {
+  const activityQuery = req.query.activity || "all";
+  const sortQuery = req.query.sort || "newest";
+
+  const filter = {};
+  if (activityQuery !== "all") {
+    filter.activity = activityQuery;
+  }
+
+  const sortOrder = sortQuery === "newest" ? { date: -1 } : { date: 1 };
+
+  const activities = await Activity.find(filter).sort(sortOrder);
+  res.render("activities/index", {
+    activities,
+    activity: activityQuery,
+    sort: sortQuery,
+  });
+});
+
+//Adding a new Activity GET
+router.get("/new", (req, res) => {
+  res.render("activities/new.ejs");
+});
+
+//Add the new activity to the db POST
+router.post("/", async (req, res) => {
+  try {
+    //get user id
+    const user = req.session.user._id;
+
+    //Duration calculated
+    const duration = totalMinutesCalculated(req.body.hours, req.body.minutes);
+
+    if (isNaN(duration) || duration < 0) {
+      //handle invalid input
+      return res.status(400).send("Duration must be a number bigger than 0");
+    }
+
+    //Distance
+    const distance = parseFloat(req.body.distance);
+    if (isNaN(distance) || distance < 0) {
+      //handle invalid input
+      return res.status(400).send("Distance must be a number bigger than 0");
+    }
+
+    //completed parsed correctly - check box
+    const completed = req.body.completed === "true";
+
+    const newActivity = new Activity({
+      owner: user,
+      date: req.body.date || new Date(), // default to today if not set
+      activity: req.body.activity,
+      duration: duration,
+      distance: distance,
+      intensity: req.body.intensity,
+      completed: completed,
+      notes: req.body.notes?.trim() || undefined, //handles empty or missing notes.
+    });
+
+    await newActivity.save();
+
+    res.redirect("/activities");
+  } catch (e) {
+    console.log("Couldn't add the activity to the DB", e);
+    res.status(500).send("Couldn't add activity");
+  }
+});
+
+//show page for each activity
+router.get("/:activityId", async (req, res) => {
+  const activity = await Activity.findById(req.params.activityId);
+  const duration = formatDuration(activity.duration);
+
+  res.render("activities/show.ejs", { activity, duration });
+});
+
+//Get router for edit
+router.get("/:activityId/edit", async (req, res) => {
+  try {
+    const activity = await Activity.findById(req.params.activityId);
+    //Separate hours and minutes - use helper funtion
+    const { hours, minutes } = separateDuration(activity.duration);
+    console.log("Hours", hours, "Minutes", minutes);
+    res.render("activities/edit.ejs", { activity, hours, minutes });
+  } catch (e) {
+    console.log("Cannot edit the activity", e);
+    res.status(500).send("Cannot edit the activity");
+  }
+});
+
+router.put("/:activityId", async (req, res) => {
+  try {
+    const currentActivity = await Activity.findById(req.params.activityId);
+    //console.log(currentActivity);
+
+    //get user id
+    const user = req.session.user._id;
+
+    //Duration calculated
+    const duration = totalMinutesCalculated(req.body.hours, req.body.minutes);
+
+    if (isNaN(duration) || duration < 0) {
+      //handle invalid input
+      return res.status(400).send("Duration must be a number bigger than 0");
+    }
+
+    //Distance
+    const distance = parseFloat(req.body.distance);
+    if (isNaN(distance) || distance < 0) {
+      //handle invalid input
+      return res.status(400).send("Distance must be a number bigger than 0");
+    }
+
+    //completed parsed correctly - check box
+    const completed = req.body.completed === "true";
+
+    currentActivity.set({
+      owner: user,
+      date: req.body.date || new Date(), // default to today if not set
+      activity: req.body.activity,
+      duration: duration,
+      distance: distance,
+      intensity: req.body.intensity,
+      completed: completed,
+      notes: req.body.notes?.trim() || undefined, //handles empty or missing notes.
+    });
+
+    await currentActivity.save();
+
+    res.redirect(`/activities/${req.params.activityId}`);
+  } catch (e) {
+    console.log("Couldn't update the activity to the DB", e);
+    res.status(500).send("Couldn't update activity");
+  }
+});
+
+//delete activity feature
+router.delete("/:activityId", async (req, res) => {
+  try {
+    await Activity.findByIdAndDelete(req.params.activityId);
+    res.redirect("/activities");
+  } catch (e) {
+    console.log("Cannot delete activity", e);
+    res.status(500).send("Cannot delete activity");
+  }
+});
+
+module.exports = router;

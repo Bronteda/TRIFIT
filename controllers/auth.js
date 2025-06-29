@@ -2,13 +2,16 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
+const passUserToView = require("../middleware/pass-user-to-view");
+
 //models
 const User = require("../models/user.js");
+
+router.use(passUserToView);
 
 //Get the sign up page
 router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs", {
-    currentPage: "sign-up",
     user: req.user || null,
   });
 });
@@ -45,7 +48,6 @@ router.post("/sign-up", async (req, res) => {
 router.get("/sign-in", (req, res) => {
   res.render("auth/sign-in.ejs", {
     newUser: req.query.newUser || false,
-    currentPage: "sign-in",
     user: req.user || null,
   });
 });
@@ -62,7 +64,7 @@ router.post("/sign-in", async (req, res) => {
     //check if the password is correct
     const validPassword = bcrypt.compareSync(
       req.body.password,
-      userInDatabase.password
+      userInDatabase.password,
     );
 
     if (!validPassword) {

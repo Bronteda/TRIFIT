@@ -28,14 +28,18 @@ const connectDB = async () => {
 
 //--Controllers--
 const authController = require("./controllers/auth.js");
+const activitiesController = require("./controllers/activities.js");
+const trainingPlanController = require("./controllers/trainingPlan.js");
 
 //-- Session Middleware--
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
+const { transcode } = require("buffer");
 
 //--Middleware--
 //this is to help read req.body
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
 // Set EJS as view engine
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -44,7 +48,7 @@ app.use(
     secret: process.env.SESSION_SECRET, // used to sign the session ID cookie
     resave: false, // don't save session if unmodified
     saveUninitialized: true,
-  })
+  }),
 );
 
 //--Routes--
@@ -65,6 +69,8 @@ app.get("/", (req, res) => {
 //--After login page--
 app.use("/auth", authController);
 app.use(isSignedIn); //This means all the routes after isSignedIn require a signed-in user.
+app.use("/activities", activitiesController);
+app.use("/trainingPlan", trainingPlanController);
 
 //--Start Server--
 connectDB().then(() => {

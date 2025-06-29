@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+    <title>Edit Activity</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="card p-5">
+          <h1 class="title is-3 has-text-centered">Edit Activity</h1>
+
+          <form action="/activities/<%= activity._id %>?_method=PUT" method="POST">
+            <!-- Completed -->
+            <div class="field">
+              <label class="label">Completed</label>
+              <label class="switch is-rounded">
+                <input type="checkbox" name="completed" value="true" <%= activity.completed ? 'checked' : '' %> />
+                <span class="check"></span>
+              </label>
+            </div>
+            
+            <!-- Date -->
+            <div class="field">
+              <label class="label" for="date">Date</label>
+              <div class="control">
+                <input class="input" type="date" id="date" name="date" value="<%= activity.date.toISOString().substring(0, 10) %>" required />
+              </div>
+            </div>
+
+            <!-- Activity Type -->
+            <div class="field">
+              <label class="label" for="activity">Activity Type</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select id="activity" name="activity">
+                    <option value="Swim" <%= activity.activity === 'Swim' ? 'selected' : '' %>>Swim</option>
+                    <option value="Cycle" <%= activity.activity === 'Cycle' ? 'selected' : '' %>>Cycle</option>
+                    <option value="Run" <%= activity.activity === 'Run' ? 'selected' : '' %>>Run</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="field is-grouped">
+              <div class="control is-expanded">
+                <label class="label" for="hours">Hours</label>
+                <input class="input" type="number" name="hours" id="hours" value="<%= hours %>" min="0" />
+              </div>
+              <div class="control is-expanded">
+                <label class="label" for="minutes">Minutes</label>
+                <input class="input" type="number" name="minutes" id="minutes" value="<%= minutes %>" min="0" max="59" />
+              </div>
+            </div>
+
+            <!-- Distance -->
+            <div class="field">
+              <label class="label" for="distance">Distance (km)</label>
+              <div class="control">
+                <input class="input" type="number" name="distance" id="distance" value="<%= activity.distance %>" min="0" step="0.01" />
+              </div>
+            </div>
+
+            <!-- Intensity -->
+            <div class="field">
+              <label class="label" for="intensity">Intensity</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select name="intensity" id="intensity">
+                    <option value="Low" <%= activity.intensity === 'Low' ? 'selected' : '' %>>Low</option>
+                    <option value="Moderate" <%= activity.intensity === 'Moderate' ? 'selected' : '' %>>Moderate</option>
+                    <option value="Vigorous" <%= activity.intensity === 'Vigorous' ? 'selected' : '' %>>Vigorous</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="field">
+              <label class="label" for="notes">Notes</label>
+              <div class="control">
+                <textarea class="textarea" name="notes" id="notes" rows="4"><%= activity.notes %></textarea>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="field has-text-centered mt-5">
+              <button type="submit" class="button is-success is-medium has-text-weight-bold">Update Activity</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

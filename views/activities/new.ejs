@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% /* Head as before */ %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Add Activity</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="card p-5">
+          <h1 class="title is-3 has-text-centered">Add a New Activity</h1>
+
+          <form action="/activities" method="POST">
+            <!-- Completed -->
+            <div class="field">
+              <label class="label">Completed</label>
+              <label class="switch is-rounded">
+                <input type="checkbox" name="completed" value="true" />
+                <span class="check"></span>
+              </label>
+            </div>
+            <!-- Date -->
+            <div class="field">
+              <label class="label" for="date">Date</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="date"
+                  id="date"
+                  name="date"
+                  required
+                />
+              </div>
+            </div>
+            <!-- Activity Type-->
+            <div class="field">
+              <label class="label" for="activity">Activity Type</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select name="activity" id="activity">
+                    <option value="Swim">Swim</option>
+                    <option value="Cycle">Cycle</option>
+                    <option value="Run">Run</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Duration -->
+            <div class="field is-grouped">
+              <div class="control is-expanded">
+                <label class="label" for="hours">Hours</label>
+                <input
+                  class="input"
+                  type="number"
+                  name="hours"
+                  id="hours"
+                  min="0"
+                  value="0"
+                />
+              </div>
+              <div class="control is-expanded">
+                <label class="label" for="minutes">Minutes</label>
+                <input
+                  class="input"
+                  type="number"
+                  name="minutes"
+                  id="minutes"
+                  min="0"
+                  max="59"
+                  value="0"
+                />
+              </div>
+            </div>
+            <!-- Distance -->
+            <div class="field">
+              <label class="label" for="distance">Distance (km)</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="number"
+                  name="distance"
+                  id="distance"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+            </div>
+            <!-- Intensity -->
+            <div class="field">
+              <label class="label" for="intensity">Intensity</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select name="intensity" id="intensity">
+                    <option value="Low">Low</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Vigorous">Vigorous</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Notes -->
+            <div class="field">
+              <label class="label" for="notes">Notes</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  name="notes"
+                  id="notes"
+                  rows="4"
+                  placeholder="Optional notes about your activity..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="field has-text-centered mt-5">
+              <button
+                type="submit"
+                class="button is-success is-medium has-text-weight-bold"
+              >
+                Add Activity
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

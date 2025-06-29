@@ -15,17 +15,9 @@
     <title>TRIFIT</title>
   </head>
   <body>
-    <%- include('./partials/navbar.ejs') %>
-    <section class="section has-background-white has-text-centered">
-      <div class="container">
-        <h1 class="title is-2 has-text-black">Welcome</h1>
-        <img
-          src="/images/trifit-logo-full.png"
-          alt="TriFit Logo"
-          class="navbar-logo-centered"
-          style="max-height: 500px"
-        />
-      </div>
-    </section>
+    <%- include('../partials/navbar.ejs') %>
+    <h1>Welcome to the Training Schedule</h1>
+
+    <h2>This is week <%= weekDates[0]%></h2>
   </body>
 </html>

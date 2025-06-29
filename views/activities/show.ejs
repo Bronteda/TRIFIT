@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+    <title><%= activity.activity %> | TriFit</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="card has-background-dark has-text-white p-5">
+          <h1 class="title is-3 has-text-white mb-3">
+            <% if (activity.activity === 'Swim') { %>🏊
+            <% } else if (activity.activity === 'Cycle') { %>🚴
+            <% } else if (activity.activity === 'Run') { %>🏃
+            <% } %>
+            <%= activity.activity %>
+          </h1>
+
+          <div class="content">
+            <% if (activity.date) { %>
+              <p><span class="has-text-weight-semibold">Date:</span> <%= activity.date.toDateString ? activity.date.toDateString() : activity.date %></p>
+            <% } %>
+
+            <p><span class="has-text-weight-semibold .is-size-1">Duration:</span> <%= duration %></p>
+
+            <% if (activity.distance) { %>
+              <p><span class="has-text-weight-semibold">Distance:</span> <%= activity.distance %> km</p>
+            <% } %>
+
+            <% if (activity.intensity) { %>
+              <p><span class="has-text-weight-semibold">Intensity:</span>
+                <span class="tag <%= activity.intensity.toLowerCase() %>-tag ml-2">
+                  <%= activity.intensity %>
+                </span>
+              </p>
+            <% } %>
+
+            <% if (activity.notes) { %>
+              <p><span class="has-text-weight-semibold">Notes:</span> <em><%= activity.notes %></em></p>
+            <% } %>
+
+            <p class="mt-3">
+              <span class="has-text-weight-semibold">Status:</span>
+              <% if (activity.completed) { %>
+                <span class="tag is-success is-light ml-2">✅ Completed</span>
+              <% } else { %>
+                <span class="tag is-warning is-light ml-2">⏳ Not Completed</span>
+              <% } %>
+            </p>
+          </div>
+
+          <div class="buttons mt-5">
+            <a class="button is-info has-text-weight-bold" href="/activities/<%= activity._id %>/edit">Edit Activity</a>
+
+            <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="button is-danger has-text-weight-bold">Delete Activity</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
