@@ -17,38 +17,6 @@
       <div class="container">
         <h1 class="title has-text-white has-text-centered">Your Activities</h1>
 
-        <!-- Filter & Sort Form -->
-        <form method="GET" action="/activities" class="mb-5">
-          <div class="field is-grouped is-grouped-multiline is-justify-content-center">
-            <!-- Activity Type Filter -->
-            <div class="control">
-              <div class="select">
-                <select name="activity">
-                  <option value="all" <%= (typeof activity !== 'undefined' && activity === 'all') ? 'selected' : '' %>>All</option>
-                  <option value="Swim" <%= (activity === 'Swim') ? 'selected' : '' %>>Swim</option>
-                  <option value="Cycle" <%= (activity === 'Cycle') ? 'selected' : '' %>>Cycle</option>
-                  <option value="Run" <%= (activity === 'Run') ? 'selected' : '' %>>Run</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Sort Order -->
-            <div class="control">
-              <div class="select">
-                <select name="sort">
-                  <option value="newest" <%= (sort === 'newest') ? 'selected' : '' %>>Newest First</option>
-                  <option value="oldest" <%= (sort === 'oldest') ? 'selected' : '' %>>Oldest First</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="control">
-              <button class="button is-link" type="submit">Apply</button>
-            </div>
-          </div>
-        </form>
-
         <!-- Activity Cards -->
         <div class="columns is-multiline">
           <% activities.forEach(activity => { %>

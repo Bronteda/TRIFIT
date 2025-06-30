@@ -11,24 +11,15 @@ const {
   separateDuration,
   formatDuration,
 } = require("../utils/format-duration");
+const User = require("../models/user");
 
 //Home page of Activities
 router.get("/", async (req, res) => {
-  const activityQuery = req.query.activity || "all";
-  const sortQuery = req.query.sort || "newest";
-
-  const filter = {};
-  if (activityQuery !== "all") {
-    filter.activity = activityQuery;
-  }
-
-  const sortOrder = sortQuery === "newest" ? { date: -1 } : { date: 1 };
-
-  const activities = await Activity.find(filter).sort(sortOrder);
+  //*Add a sort and filter feature
+  const user = req.session.user._id;
+  const activities = await Activity.find({owner:user});
   res.render("activities/index", {
-    activities,
-    activity: activityQuery,
-    sort: sortQuery,
+    activities
   });
 });
 
