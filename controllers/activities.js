@@ -11,6 +11,7 @@ const {
   separateDuration,
   formatDuration,
 } = require("../utils/format-duration");
+const getWeekDates = require("../utils/dateHelper");
 const User = require("../models/user");
 
 //Home page of Activities
@@ -150,5 +151,6 @@ router.delete("/:activityId", async (req, res) => {
     res.status(500).send("Cannot delete activity");
   }
 });
+
 
 module.exports = router;

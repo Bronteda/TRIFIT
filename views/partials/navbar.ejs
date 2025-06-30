@@ -8,12 +8,12 @@
   >
     <!-- Left links -->
     <div class="navbar-start is-flex-grow-1">
-      <a class="navbar-item has-text-weight-bold trifit-nav-link" href="/">Home</a>
+      <a class="navbar-item has-text-weight-bold has-text-light has-text-weight-bold is-link" href="/">Home</a>
 
       <% if (user) { %>
-      <a class="navbar-item trifit-nav-link" href="/activities">My Activities</a>
-      <a class="navbar-item trifit-nav-link" href="/trainingPlan">Training Plan</a>
-      <a class="navbar-item trifit-nav-link" href="/dashboard"> Dashboard </a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/activities">My Activities</a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/trainingPlan">Training Plan</a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/dashboard"> Dashboard </a>
       <% } %>
     </div>
 
@@ -30,14 +30,14 @@
     <!-- Right links -->
     <div class="navbar-end is-flex-grow-1 is-justify-content-flex-end">
       <% if (user) { %>
-      <a class="navbar-item trifit-nav-link" href="/community"> Community </a>
-      <a class="navbar-item trifit-nav-link" href="/auth/sign-out">Sign Out</a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/community"> Community </a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/auth/sign-out">Sign Out</a>
       <% } else { %> 
       <% if (currentPage !== '/auth/sign-in') { %>
-      <a class="navbar-item trifit-nav-link" href="/auth/sign-in"> Sign In </a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/auth/sign-in"> Sign In </a>
       <% } %> 
       <% if (currentPage !== '/auth/sign-up') { %>
-      <a class="navbar-item trifit-nav-link" href="/auth/sign-up"> Sign Up </a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/auth/sign-up"> Sign Up </a>
       <% } %> 
       <% } %>
     </div>

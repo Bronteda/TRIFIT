@@ -6,26 +6,13 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-input.input {
-  font-family: "Poppins", sans-serif;
-}
-
 /* --------------------------
    Navbar Styling
 --------------------------- */
 
 /* Navbar container */
 .navbar.trifit-navbar {
-  background-color: #0d1f2d !important;
   font-family: "Montserrat", sans-serif;
-}
-
-/* All navbar items */
-.navbar.trifit-navbar .navbar-item {
-  color: #efebd6 !important;
-  /* 7bcea0 */
-  font-weight: 700;
-  letter-spacing: 0.5px;
 }
 
 /* Hover effect for nav items */
@@ -64,27 +51,6 @@ input.input {
   padding: 0 1rem;
   gap: 12px;
 }
-
-/* Reduce padding on navbar logo wrapper */
-.navbar-item.trifit-logo-wrap {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* --------------------------
-   Nav Link Styling
---------------------------- */
-.trifit-nav-link {
-  color: #efebd6;
-  font-weight: 600;
-  font-family: "Poppins", sans-serif;
-}
-
-.trifit-nav-link:hover {
-  background-color: #2196f3;
-  color: white !important;
-}
-
 /* --------------------------
    Activities Link Styling
 --------------------------- */
@@ -137,27 +103,6 @@ input.input {
 .switch input:checked + .check::before {
   transform: translateX(24px);
 }
-
-.tag {
-  font-size: 0.7rem;
-  font-weight: 500;
-}
-
-.low-tag {
-  background-color: #6fcf97;
-  color: #fff;
-}
-
-.moderate-tag {
-  background-color: #f2c94c;
-  color: #000;
-}
-
-.vigorous-tag {
-  background-color: #eb5757;
-  color: #fff;
-}
-
 
 /* --------------------------
    Responsive adjustments
