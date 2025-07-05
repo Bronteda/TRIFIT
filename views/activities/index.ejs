@@ -4,9 +4,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>My Activities</title>
   </head>
 
@@ -15,71 +21,99 @@
 
     <section class="section">
       <div class="container">
-        <h1 class="title has-text-white has-text-centered">Your Activities</h1>
+        <h1 class="title is-1 has-text-white has-text-centered">
+          Your Activities
+        </h1>
+        <div class="columns is-vcentered mb-2">
+          
+          <div class="column is-4 has-text-left">
+            <a
+              class="button is-success is-medium has-text-weight-bold"
+              href="/activities/new"
+            >
+              + Add Activity
+            </a>
+          </div>
 
-        <!-- Activity Cards -->
+          <div class="column is-4 has-text-centered">
+            <form
+              action="/activities"
+              method="GET"
+              class="is-flex is-justify-content-center is-align-items-center"
+            >
+              <div class="select is-medium mr-3">
+                <select name="activity" id="activity">
+                  <option value="All">All</option>
+                  <option value="Swim">Swim</option>
+                  <option value="Cycle">Cycle</option>
+                  <option value="Run">Run</option>
+                </select>
+              </div>
+                <div class="select is-medium mr-3">
+                <select name="completed" id="completed">
+                  <option value="all">All Activities</option>
+                  <option value="completed">Completed Activities</option>
+                  <option value="planned">Planned Activities</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="button is-success is-medium has-text-weight-bold"
+              >
+                Filter
+              </button>
+            </form>
+          </div>
+
+        </div>
+
         <div class="columns is-multiline">
           <% activities.forEach(activity => { %>
           <div class="column is-4">
-            <a href="/activities/<%= activity._id %>" class="card has-background-dark has-text-white activity-card-link">
+            <a
+              href="/activities/<%= activity._id %>"
+              class="card has-background-white-ter has-text-black activity-card-link"
+            >
               <div class="card-content">
-                <!-- Activity Type Icon & Label -->
-                <p class="title is-5 has-text-white">
-                  <% if (activity.activity === 'Swim') { %>
-                    🏊 <strong>Swim</strong>
-                  <% } else if (activity.activity === 'Cycle') { %>
-                    🚴 <strong>Cycle</strong>
-                  <% } else if (activity.activity === 'Run') { %>
-                    🏃 <strong>Run</strong>
+                <p class="title is-5 has-text-black">
+                  <% if (activity.activity === 'Swim') { %> 🏊
+                  <strong>Swim</strong> <% } else if (activity.activity ===
+                  'Cycle') { %> 🚴 <strong>Cycle</strong> <% } else if
+                  (activity.activity === 'Run') { %> 🏃 <strong>Run</strong>
+                  <% } else { %> <%= activity.activity %> <% } %>
+                </p>
+                <% if (activity.date) { %>
+                <p class="subtitle is-6 has-text-black">
+                  Date: <%= activity.date.toDateString ?
+                  activity.date.toDateString() : activity.date %>
+                </p>
+                <% } %> <% if (activity.distance) { %>
+                <p>Distance: <%= activity.distance %> km</p>
+                <% } %> <% if (activity.intensity) { %>
+                <p>
+                  Intensity:
+                  <span
+                    class="tag <%= activity.intensity.toLowerCase() %>-tag ml-2"
+                  >
+                    <%= activity.intensity %>
+                  </span>
+                </p>
+                <% } %> <% if (typeof activity.completed !== 'undefined') { %>
+                <p class="mt-2">
+                  <% if (activity.completed) { %>
+                  <span class="tag is-success is-light">✅ Completed</span>
                   <% } else { %>
-                    <%= activity.activity %>
+                  <span class="tag is-warning is-light">⏳ Not Completed</span>
                   <% } %>
                 </p>
-
-                <!-- Activity Details -->
-                <% if (activity.date) { %>
-                  <p class="subtitle is-6 has-text-grey-light">
-                    Date: <%= activity.date.toDateString ? activity.date.toDateString() : activity.date %>
-                  </p>
-                <% } %>
-
-                <% if (activity.distance) { %>
-                  <p>Distance: <%= activity.distance %> km</p>
-                <% } %>
-
-                <% if (activity.intensity) { %>
-                  <p>
-                    Intensity:
-                    <span class="tag <%= activity.intensity.toLowerCase() %>-tag ml-2">
-                      <%= activity.intensity %>
-                    </span>
-                  </p>
-                <% } %>
-
-                <% if (typeof activity.completed !== 'undefined') { %>
-                  <p class="mt-2">
-                    <% if (activity.completed) { %>
-                      <span class="tag is-success is-light">✅ Completed</span>
-                    <% } else { %>
-                      <span class="tag is-warning is-light">⏳ Not Completed</span>
-                    <% } %>
-                  </p>
-                <% } %>
-
-                <% if (activity.notes) { %>
-                  <p class="is-italic">“<%= activity.notes %>”</p>
+                <% } %> <% if (activity.notes) { %>
+                <p class="is-italic">“<%= activity.notes %>”</p>
                 <% } %>
               </div>
             </a>
           </div>
           <% }); %>
-        </div>
-
-        <!-- Add New Activity Button -->
-        <div class="has-text-centered mt-5">
-          <a class="button is-success is-medium has-text-weight-bold" href="/activities/new">
-            + Add Activity
-          </a>
         </div>
       </div>
     </section>

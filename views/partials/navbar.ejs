@@ -1,24 +1,13 @@
 <nav
-  class="navbar trifit-navbar is-dark has-background-dark px-4 py-3"
+  class="navbar trifit-navbar is-dark px-4 py-3"
   role="navigation"
   aria-label="main navigation"
 >
   <div
-    class="navbar-menu is-active is-flex is-align-items-center is-justify-content-space-between"
-  >
-    <!-- Left links -->
-    <div class="navbar-start is-flex-grow-1">
-      <a class="navbar-item has-text-weight-bold has-text-light has-text-weight-bold is-link" href="/">Home</a>
-
-      <% if (user) { %>
-      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/activities">My Activities</a>
-      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/trainingPlan">Training Plan</a>
-      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/dashboard"> Dashboard </a>
-      <% } %>
-    </div>
-
-    <!-- Center: TriFit Logo (Icons + Name) -->
-    <div class="trifit-logo-wrap">
+    class="navbar-menu is-active is-flex is-align-items-center is-justify-content-space-between" >
+    <% if (user) { %>
+    <a href="/dashboard">
+    <div class="is-flex is-align-items-center is-justify-content-center ">
       <img
         src="/images/trifit-icon.png"
         alt="TriFit Symbols"
@@ -26,11 +15,32 @@
       />
       <span class="trifit-text">TRIFIT</span>
     </div>
+    </a>
+    <%}else{ %>
+      <a href="/">
+    <div class="is-flex is-align-items-center is-justify-content-center ">
+      <img
+        src="/images/trifit-icon.png"
+        alt="TriFit Symbols"
+        class="trifit-icon"
+      />
+      <span class="trifit-text">TRIFIT</span>
+    </div>
+    </a>
+    <%}%>
+    <!-- left side of the nav bar  -->
+    <div class="navbar-start is-flex-grow-1 ">
+      <% if (user) { %>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/activities">My Activities</a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/trainingPlan">Training Plan</a>
+      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/dashboard"> Dashboard </a>
+      <% } %>
+    </div>
+    
 
-    <!-- Right links -->
+    <!-- Right side of nav bar  -->
     <div class="navbar-end is-flex-grow-1 is-justify-content-flex-end">
       <% if (user) { %>
-      <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/community"> Community </a>
       <a class="navbar-item has-text-light has-text-weight-bold is-link" href="/auth/sign-out">Sign Out</a>
       <% } else { %> 
       <% if (currentPage !== '/auth/sign-in') { %>

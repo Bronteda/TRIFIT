@@ -1,64 +1,43 @@
-/* --------------------------
-   Global Styles
---------------------------- */
+/* Global styling */
 body {
-  background-color: #0d1f2d; /* Deep navy */
+  background-color: #062942; /* Deep navy */
   font-family: "Poppins", sans-serif;
+   min-height: 100vh;
 }
 
-/* --------------------------
-   Navbar Styling
---------------------------- */
+/* navbar styling */
 
-/* Navbar container */
 .navbar.trifit-navbar {
   font-family: "Montserrat", sans-serif;
+  background-color: #071825;
 }
 
-/* Hover effect for nav items */
 .navbar.trifit-navbar .navbar-item:hover {
   background-color: #0077c8 !important;
   color: #ffffff !important;
 }
 
-/* --------------------------
-   TriFit Branding
---------------------------- */
-
-/* Logo icons */
+/* Logo Styling */
 .trifit-icon {
   height: 65px;
-  transform: scale(0.8);
+  transform: scale(0.7);
   transform-origin: center;
   width: auto;
   object-fit: contain;
 }
 
-/* "TRIFIT" name styling */
 .trifit-text {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  font-size: 2.6rem;
+  font-size: 2.2rem;
   color: #efebd6;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
 }
 
-/* Flex layout for icon + text */
-.trifit-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
-  gap: 12px;
-}
-/* --------------------------
-   Activities Link Styling
---------------------------- */
+/* acivities link styling */
 .activity-card-link {
   text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: block;
   border-radius: 8px;
 }
@@ -75,7 +54,7 @@ body {
 }
 
 .switch input:checked + .check {
-  background-color: #4CAF50; /* your green */
+  background-color: #4caf50;
 }
 
 .switch .check {
@@ -104,9 +83,25 @@ body {
   transform: translateX(24px);
 }
 
-/* --------------------------
-   Responsive adjustments
---------------------------- */
+/* Intensity level tags  */
+.low-tag{
+  color:white;
+  background-color: #10b981;
+}
+
+.moderate-tag{
+  color:white;
+  background-color: orange;
+}
+
+.vigorous-tag{
+  color:white;
+  background-color: rgb(190, 61, 61);
+}
+
+
+
+/* mobile responsive */
 @media (max-width: 768px) {
   .trifit-icon {
     height: 50px;

@@ -17,6 +17,7 @@
           <h1 class="title is-3 has-text-centered">Edit Activity</h1>
 
           <form action="/activities/<%= activity._id %>?_method=PUT" method="POST">
+
             <!-- Completed -->
             <div class="field">
               <label class="label">Completed</label>
@@ -30,7 +31,7 @@
             <div class="field">
               <label class="label" for="date">Date</label>
               <div class="control">
-                <input class="input" type="date" id="date" name="date" value="<%= activity.date.toISOString().substring(0, 10) %>" required />
+                <input class="input" type="date" id="date" name="date" min="2020-01-01" max="2100-12-31" value="<%= activity.date.toISOString().substring(0, 10) %>"/>
               </div>
             </div>
 
@@ -52,7 +53,7 @@
             <div class="field is-grouped">
               <div class="control is-expanded">
                 <label class="label" for="hours">Hours</label>
-                <input class="input" type="number" name="hours" id="hours" value="<%= hours %>" min="0" />
+                <input class="input" type="number" name="hours" id="hours" value="<%= hours %>" min="0" max="24"/>
               </div>
               <div class="control is-expanded">
                 <label class="label" for="minutes">Minutes</label>
@@ -64,7 +65,7 @@
             <div class="field">
               <label class="label" for="distance">Distance (km)</label>
               <div class="control">
-                <input class="input" type="number" name="distance" id="distance" value="<%= activity.distance %>" min="0" step="0.01" />
+                <input class="input" type="number" name="distance" id="distance" value="<%= activity.distance %>" min="0" max="1000" step="0.01" />
               </div>
             </div>
 
@@ -86,7 +87,7 @@
             <div class="field">
               <label class="label" for="notes">Notes</label>
               <div class="control">
-                <textarea class="textarea" name="notes" id="notes" rows="4"><%= activity.notes %></textarea>
+                <textarea class="textarea" name="notes" id="notes" rows="4" maxlength="250"><%= activity.notes %></textarea>
               </div>
             </div>
 

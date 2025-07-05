@@ -4,6 +4,7 @@ const router = express.Router();
 
 //import our models
 const Activity = require("../models/activity");
+const User = require("../models/user");
 
 //import our utils - helper functions
 const {
@@ -12,15 +13,48 @@ const {
   formatDuration,
 } = require("../utils/format-duration");
 const getWeekDates = require("../utils/dateHelper");
-const User = require("../models/user");
+const { sortedActivities } = require("../utils/activityHelper");
 
 //Home page of Activities
 router.get("/", async (req, res) => {
-  //*Add a sort and filter feature
+  //*Sorted activities from most recent to older
+
+  switch (req.query.activity) {
+    case "Run":
+     filter1 = "Run";
+      break;
+    case "Cycle":
+     filter1 = "Cycle";
+      break;
+    case "Swim":
+     filter1 = "Swim";
+      break;
+    case "All":
+     filter1 = ["Run", "Swim", "Cycle"];
+      break;
+    default:
+     filter1 = ["Run", "Swim", "Cycle"]
+      break;
+  }
+
+ switch (req.query.completed) {
+    case "completed":
+     filter2 = true;
+      break;
+    case "planned":
+     filter2 = false;
+      break;
+    default:
+     filter2 = [true,false]
+      break;
+  }
+
   const user = req.session.user._id;
-  const activities = await Activity.find({owner:user});
+  const activities = await Activity.find({ owner: user, activity: filter1 , completed: filter2 });
+  const activitiesSorted = sortedActivities(activities);
+
   res.render("activities/index", {
-    activities
+    activities: activitiesSorted,
   });
 });
 
@@ -151,6 +185,5 @@ router.delete("/:activityId", async (req, res) => {
     res.status(500).send("Cannot delete activity");
   }
 });
-
 
 module.exports = router;

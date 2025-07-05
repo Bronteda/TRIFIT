@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Add Event</title>
+  </head>
+  <body>
+    <%- include('../../partials/navbar.ejs') %>
+
+    <section class="section">
+      <div class="container">
+        <div class="card p-5">
+          <h1 class="title is-3 has-text-centered">Add a New Event</h1>
+          <form action="/dashboard/event" method="POST">
+            <div class="field">
+              <label class="label" for="name">Event Name:</label>
+              <div class="control">
+                <input class="input" type="text" name="name" id="name" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="date">Date of Event:</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="date"
+                  id="date"
+                  name="date"
+                  min="2020-01-01"
+                  max="2100-12-31"
+                  required
+                />
+              </div>
+            </div>
+            <h3 class="label">Estimated Time to finish :</h3>
+            <div class="field is-grouped">
+              <div class="control is-expanded">
+                <label class="label" for="hours">Hours</label>
+                <input
+                  class="input"
+                  type="number"
+                  name="hours"
+                  id="hours"
+                  max="24"
+                  min="0"
+                />
+              </div>
+              <div class="control is-expanded">
+                <label class="label" for="minutes">Minutes</label>
+                <input
+                  class="input"
+                  type="number"
+                  name="minutes"
+                  id="minutes"
+                  min="0"
+                  max="59"
+                />
+              </div>
+            </div>
+            <div class="field has-text-centered mt-5">
+              <button
+                class="button is-success is-medium has-text-weight-bold"
+                type="submit"
+              >
+                Add Event
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

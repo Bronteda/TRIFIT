@@ -12,20 +12,29 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <title>TRIFIT</title>
+    <title>TriFit</title>
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <section class="section has-background-white has-text-centered">
-      <div class="container">
-        <h1 class="title is-2 has-text-black">Welcome</h1>
-        <img
-          src="/images/trifit-logo-full.png"
-          alt="TriFit Logo"
-          class="navbar-logo-centered"
-          style="max-height: 500px"
-        />
+
+    <section class="hero is-fullheight">
+      <div class="section is-flex is-flex-direction-column is-align-items-center is-justify-content-center has-text-centered py-6">
+        <div class="container has-text-centered">
+          <h1 class="title is-1 trifit-text mb-1">
+            Welcome to TRIFIT
+          </h1>
+
+          <p class="subtitle is-4 trifit-text mb-5">
+            Train the way you want to. Track your performance. Triumph in your goals.
+          </p>
+
+          <figure class="image is-inline-block" style="max-width: 600px; width: 100%;">
+            <img src="/images/trifit-logo-full.png" alt="TriFit Logo" />
+          </figure>
+
+        </div>
       </div>
     </section>
   </body>
 </html>
+

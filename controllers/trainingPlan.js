@@ -1,52 +1,103 @@
 const express = require("express");
-const mongoose = require("mongoose");
-
 const router = express.Router();
 
 //import our models
 const Activity = require("../models/activity");
+const User = require("../models/user");
 
 //import our utils - helper functions
-const {
-  totalMinutesCalculated,
-  separateDuration,
-  formatDuration,
-} = require("../utils/format-duration");
-const getWeekDates = require("../utils/dateHelper");
-const User = require("../models/user");
+const { getWeekDates, getActivitiesOnDate } = require("../utils/dateHelper");
+const { sortedActivities } = require("../utils/activityHelper");
 
 // Home page of the training plan link
 router.get("/", async (req, res) => {
   try {
-    //getting Monday and sunday of the current week
-    const todayDate = new Date();
-    const { monday, sunday } = getWeekDates(todayDate);
+    //getting Monday to sunday of the current week
+    let todayDate = new Date();
+    const week = req.query.week;
+    const templateMonday = new Date(Date.parse(req.query.mondayWeek));
+    //console.log("monday in ejs",templateMonday);
 
+    // console.log("last week monday",todayDate);
+    switch (week) {
+      case "prev":
+        todayDate = templateMonday.setDate(templateMonday.getDate() - 7);
+        break;
+      case "next":
+        todayDate = templateMonday.setDate(templateMonday.getDate() + 7);
+        break;
+      case "current":
+        todayDate = new Date();
+        break;
+      default:
+        todayDate = new Date();
+        break;
+    }
+    //console.log("todayDate",todayDate);
+
+    //getting Monday to sunday of the current week we are looking at
+    const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } =
+      getWeekDates(todayDate);
     //sorting all the users activities by date recent first
     const activities = await Activity.find({
       owner: req.session.user._id,
     });
 
-    const activitiesSorted = activities.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateA - dateB;
-    });
+    // const activitiesSorted = activities.sort((a, b) => {
+    //   const dateA = new Date(a.date);
+    //   const dateB = new Date(b.date);
+    //   return dateA - dateB;
+    // });
+
+    const activitiesSorted = sortedActivities(activities);
 
     //console.log(activitiesSorted);
 
     const currentWeekActivities = activitiesSorted.filter((activity) => {
+      // console.log("activity date",activity.date);
+      // console.log("monday",monday);
+      // console.log("sunday",sunday);
       return activity.date >= monday && activity.date <= sunday;
     });
 
-    const mondayActivities = activitiesSorted.filter((activity) => {
-      //console.log("activity.date", activity.date.toDateString, "monday", monday.toDateString(10));
-      return activity.date.toDateString(10) === monday.toDateString(10);
+    //console.log(currentWeekActivities);
+
+    //added a helper function to get each days activties.
+    const mondayActivities = getActivitiesOnDate(monday, activitiesSorted);
+    //console.log("monday activity", mondayActivities);
+    const tuesdayActivities = getActivitiesOnDate(tuesday, activitiesSorted);
+    const wednesdayActivities = getActivitiesOnDate(
+      wednesday,
+      activitiesSorted
+    );
+    const thursdayActivities = getActivitiesOnDate(thursday, activitiesSorted);
+    const fridayActivities = getActivitiesOnDate(friday, activitiesSorted);
+    const saturdayActivities = getActivitiesOnDate(saturday, activitiesSorted);
+    const sundayActivities = getActivitiesOnDate(sunday, activitiesSorted);
+
+    daysOfWeek = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+    console.log("Monday sending", monday);
+
+    res.render("trainingPlan/index.ejs", {
+      mondayActivities,
+      tuesdayActivities,
+      wednesdayActivities,
+      thursdayActivities,
+      fridayActivities,
+      saturdayActivities,
+      sundayActivities,
+      monday,
+      sunday,
+      daysOfWeek,
     });
-
-    console.log(mondayActivities);
-
-    res.send(`Monday of the current week ${monday} and Sunday ${sunday}`);
   } catch (e) {
     console.log("Couldn't display Training Plan index", e);
     res.status(500).send("Couldn't display Training Plan index");

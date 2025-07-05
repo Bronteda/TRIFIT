@@ -12,6 +12,7 @@ const totalMinutesCalculated = (hours, minutes) => {
 const separateDuration = (totalMinutes) => {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
+  //console.log(hours, minutes);
   return { hours, minutes };
 };
 

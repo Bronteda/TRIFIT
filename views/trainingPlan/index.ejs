@@ -12,12 +12,135 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <title>TRIFIT</title>
+    <title>Training Plan</title>
   </head>
+
   <body>
     <%- include('../partials/navbar.ejs') %>
-    <h1>Welcome to the Training Schedule</h1>
 
-    <h2>This is week <%= weekDates[0]%></h2>
+    <section class="section has-background-dark-blue">
+      <div class="container">
+        <h1
+          class="title is-1 has-text-light has-text-centered mb-5"
+        >
+          Your Weekly Training Plan
+        </h1>
+        <h2 class="title is-4 has-text-light has-text-centered mb-5">
+          Week of <%=monday.toLocaleDateString().slice(0, 10)%> to
+          <%=sunday.toLocaleDateString().slice(0, 10)%>
+        </h2>
+        <div
+          class="columns is-mobile is-vcentered is-justify-content-space-between mb-5"
+        >
+          <div class="column is-narrow">
+            <a
+              class="button is-success has-text-weight-bold has-text-dark"
+              href="/activities/new"
+            >
+              + Add Activity
+            </a>
+          </div>
+
+          <div class="column is-narrow has-text-right">
+            <div class="buttons">
+              <a
+                class="button has-text-weight-bold"
+                href="?week=current&mondayWeek=<%=monday.toISOString().slice(0, 10)%>"
+                >Current Week</a
+              >
+              <a
+                class="button has-text-weight-bold"
+                href="?week=prev&mondayWeek=<%=monday.toISOString().slice(0, 10)%>"
+                >← Previous Week</a
+              >
+              <a
+                class="button has-text-weight-bold"
+                href="?week=next&mondayWeek=<%=monday.toISOString().slice(0, 10)%>"
+                >Next Week →</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class=" card columns is-variable is-2 is-desktop has-background-white-ter">
+          <% daysOfWeek.forEach(day => { %>
+          <div class="column is-one-seventh-desktop is-one-third-mobile">
+            <div
+              class="box has-background-white has-text-centered has-text-weight-bold is-rounded mb-3"
+            >
+              <%= day %>
+            </div>
+
+            <% let activities = []; %> 
+            <% switch(day) 
+            { case 'Monday':
+            activities = mondayActivities; 
+            break; 
+            case 'Tuesday': 
+            activities = tuesdayActivities; 
+            break; case 'Wednesday': activities =
+            wednesdayActivities; 
+            break; 
+            case 'Thursday': 
+            activities =  thursdayActivities; 
+            break; 
+            case 'Friday': activities = fridayActivities; 
+            break; 
+            case 'Saturday': 
+            activities = saturdayActivities; 
+            break; 
+            case 'Sunday': activities =sundayActivities; 
+            break; } %> 
+
+
+            <% if (activities.length > 0) { %> <%
+            activities.forEach(activity => { %>
+            <a href="/activities/<%=activity._id%>">
+              <div
+                class="card <%= activity.completed ? 'has-background-success-light' : 'has-background-white' %> <%= activity.activity === 'Race' ? 'has-background-warning' : 'has-background-white' %> mb-4"
+              >
+                <div class="card-content p-3">
+                  <p class="title is-6 has-text-dark mb-2">
+                    <% if (activity.activity === 'Swim') { %> 🏊 <% } else if
+                    (activity.activity === 'Cycle') { %> 🚴 <% } else if
+                    (activity.activity === 'Run') { %> 🏃 <% } else if
+                    (activity.activity === 'Race') { %> 🏊🚴🏃%> <% } %>
+                    <strong><%= activity.activity %></strong>
+                  </p>
+
+                  <p class="subtitle is-7 has-text-grey-dark mb-2">
+                    Date: <%= new Date(activity.date).toDateString() %>
+                  </p>
+
+                  <p class="is-size-7 has-text-dark">
+                    <% if (activity.distance !== undefined && activity.distance!== null) { %>
+                    <strong>Distance:</strong> <%= activity.distance %> km<br />
+                    <% } %> 
+                    
+                    <% if (activity.intensity) { %>
+                    <strong>Intensity:</strong>
+                    <span class="tag <%= activity.intensity.toLowerCase() %>-tag is-light is-rounded">
+                      <%= activity.intensity %> </span><br />
+                    <% } %>
+                  </p>
+
+                  <% if (activity.notes) { %>
+                  <p class="is-italic mt-2 has-text-grey-dark">
+                    “<%= activity.notes %>”
+                  </p>
+                  <% } %>
+                </div>
+              </div>
+            </a>
+            <% }) %> <% } else { %>
+            <p class="is-size-7 has-text-grey-light has-text-centered">
+              No activities
+            </p>
+            <% } %>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

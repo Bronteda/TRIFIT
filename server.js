@@ -30,6 +30,7 @@ const connectDB = async () => {
 const authController = require("./controllers/auth.js");
 const activitiesController = require("./controllers/activities.js");
 const trainingPlanController = require("./controllers/trainingPlan.js");
+const dashboardController = require("./controllers/dashboard.js");
 
 //-- Session Middleware--
 const isSignedIn = require("./middleware/is-signed-in.js");
@@ -58,7 +59,7 @@ app.use(passUserToView);
 app.get("/", (req, res) => {
   if (req.session.user) {
     // User is signed in
-    res.render("homePage.ejs", { user: req.session.user });
+    res.redirect("/dashboard");
   } else {
     // Not signed in
     res.render("index.ejs");
@@ -70,6 +71,7 @@ app.use("/auth", authController);
 app.use(isSignedIn); //This means all the routes after isSignedIn require a signed-in user.
 app.use("/activities", activitiesController);
 app.use("/trainingPlan",trainingPlanController);
+app.use("/dashboard",dashboardController);
 
 
 //--Start Server--

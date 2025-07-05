@@ -9,12 +9,13 @@ const activitySchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
   date: {
     type: Date,
-    default: Date.now, // optional: sets default to when it's created
+    required:true,
+    default: Date.now, // set default 
   },
   activity: {
     type: String,
     required: true,
-    enum: ["Swim", "Cycle", "Run"],
+    enum: ["Swim", "Cycle", "Run", "Race"],
   },
   duration: {
     type: Number,
