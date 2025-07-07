@@ -98,4 +98,4 @@ const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
   ```js
   const user = req.session.user._id;
 This ensures each user can only access and modify their own data.
-````
+```
