@@ -109,6 +109,32 @@ Supports chart data and activity sorting.
 
 ---
 
+## 🔮 Future Plans
+
+TriFit is designed to grow alongside its users. Here are some planned improvements and features under consideration:
+
+- **🔑 Forgot Password Functionality**  
+  Since user emails are stored, we plan to implement a secure password reset feature using email-based token authentication.
+
+- **🥗 Nutrition Planning Module**  
+  Integrate a section to track meals, hydration, and calories to support holistic training and recovery.
+
+- **📊 Enhanced Graphs & Dashboards**  
+  Add more detailed performance visualizations, such as:
+  - Weekly/monthly breakdowns
+  - Personal bests and trends
+
+- **🔗 Strava Integration**  
+  Enable syncing with Strava to automatically import logged activities and compare with past sessions.
+
+- **📱 Mobile-Responsive Dashboard**  
+  Improve responsiveness and accessibility across mobile devices for on-the-go tracking.
+
+- **🧠 AI-Generated Training Suggestions**  
+  Explore intelligent recommendations for weekly training loads based on past performance and upcoming events.
+
+---
+
 ## What I learnt :
 
 ### 🔄 Sort and Filter Functions
