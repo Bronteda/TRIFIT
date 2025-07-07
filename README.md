@@ -63,14 +63,17 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 
 ### 🧭 `toISOString()`
 
-- `toISOString()` takes a `Date` and converts it to a string like:
+- `toISOString()` takes a `Date` and converts it to a string like:2025-04-14T00:00:00.000Z
+
 - Then we slice it to only keep the first 10 characters:
 
 ```js
 const date = new Date();
 const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
 
+
 ---
+
 ### 🔐 Session-Based Authentication
 
 - I used `req.session.user._id` to securely associate activities and training plans with the currently logged-in user.
@@ -79,7 +82,6 @@ const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
   const user = req.session.user._id;
 This ensures each user can only access and modify their own data.
 
----
 
 ```
 ### 🧼 Form Validation & Data Sanitization
