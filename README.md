@@ -49,16 +49,18 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 ### 🔄 Sort and Filter Functions
 
 - Both are forms within EJS:
-  - They are a GET form:  
+
+  - They are a GET form:
     ```html
-    <form method="GET" action="/activities">
+    <form method="GET" action="/activities"></form>
     ```
   - **How it works:**
     - `method="GET"` tells the browser to send the form values as a query string in the URL.
     - `action="/activities"` tells the form where to send the request.
     - Each `<select name="...">` provides a key-value pair for the query string.
 
-- **When you hit submit:**  
+- **When you hit submit:**
+
 ---
 
 ### 🧭 `toISOString()`
@@ -70,11 +72,10 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 ```js
 const date = new Date();
 const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
+```
 
 ---
 
-
-```
 ### 🧼 Form Validation & Data Sanitization
 
 - I validated user input before saving it to the database:
@@ -88,7 +89,7 @@ const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
   if (isNaN(distance) || distance < 0) {
     return res.status(400).send("Distance must be a number bigger than 0");
   }
-
+  ```
 ---
 ### Session-Based Authentication
 
@@ -97,8 +98,4 @@ const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
   ```js
   const user = req.session.user._id;
 This ensures each user can only access and modify their own data.
-
-
-
-
-
+````
