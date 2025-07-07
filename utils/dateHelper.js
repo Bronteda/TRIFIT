@@ -2,7 +2,7 @@
 const getWeekDates = (todayDate) => {
   const today = new Date(todayDate);
   const currentDay = today.getDay();
- //console.log("Current day", today, "current day", currentDay);
+  //console.log("Current day", today, "current day", currentDay);
 
   //Get start of week Monday
   const monday = new Date(today);
@@ -14,7 +14,7 @@ const getWeekDates = (todayDate) => {
   //tuesday
   const tuesday = new Date(monday);
   tuesday.setDate(tuesday.getDate() + 1);
- //console.log(tuesday);
+  //console.log(tuesday);
 
   //wednesday
   const wednesday = new Date(tuesday);
@@ -55,4 +55,4 @@ const getActivitiesOnDate = (day, activitiesSorted) => {
   return dayActivities;
 };
 
-module.exports = {getWeekDates , getActivitiesOnDate};
+module.exports = { getWeekDates, getActivitiesOnDate };

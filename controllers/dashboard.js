@@ -22,7 +22,6 @@ router.get("/", async (req, res) => {
     const user = req.session.user;
     let userEvents = await Event.find({ owner: req.session.user._id });
     userEvents = userEvents.length > 0 ? userEvents : null;
-    console.error(userEvents);
 
     //this makes the function avaliable to ejs templates
     res.locals.countDown = countDown;
@@ -73,8 +72,6 @@ router.get("/", async (req, res) => {
       activityPaces: swimPaces,
     } = await getInfoLineGraphs(swimActivities, "swim");
 
-    
-
     //console.log(runDates, runDurations, runDistances, "paces",runPaces);
     res.render("dashboard/index.ejs", {
       userEvents,
@@ -107,7 +104,7 @@ router.get("/event/new", (req, res) => {
 //Add new event to mongodb POST
 router.post("/event", async (req, res) => {
   try {
-    console.log(req.body);
+    //console.log(req.body);
     const hours = req.body.hours;
     const minutes = req.body.minutes;
     const estimateDuration = totalMinutesCalculated(hours, minutes);
@@ -149,7 +146,6 @@ router.get("/event/:eventId", async (req, res) => {
   //console.log(event.estimateTime);
   //Separate hours and minutes - use helper funtion
   const { hours, minutes } = separateDuration(event.estimateTime);
-  console.log("Hours", hours, "Minutes", minutes);
 
   res.render("dashboard/events/edit.ejs", { event, hours, minutes });
 });
@@ -158,7 +154,7 @@ router.get("/event/:eventId", async (req, res) => {
 router.put("/event/:eventId", async (req, res) => {
   try {
     const currentEvent = await Event.findById(req.params.eventId);
-    console.log(req.body);
+    //console.log(req.body);
     const hours = req.body.hours;
     const minutes = req.body.minutes;
     const estimateDuration = totalMinutesCalculated(hours, minutes);

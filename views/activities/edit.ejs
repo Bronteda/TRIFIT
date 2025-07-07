@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/images/trifit-logo.png" />
     <title>Edit Activity</title>
   </head>
   <body>
@@ -18,7 +19,6 @@
 
           <form action="/activities/<%= activity._id %>?_method=PUT" method="POST">
 
-            <!-- Completed -->
             <div class="field">
               <label class="label">Completed</label>
               <label class="switch is-rounded">
@@ -26,8 +26,7 @@
                 <span class="check"></span>
               </label>
             </div>
-            
-            <!-- Date -->
+         
             <div class="field">
               <label class="label" for="date">Date</label>
               <div class="control">
@@ -35,7 +34,7 @@
               </div>
             </div>
 
-            <!-- Activity Type -->
+           
             <div class="field">
               <label class="label" for="activity">Activity Type</label>
               <div class="control">
@@ -49,7 +48,7 @@
               </div>
             </div>
 
-            <!-- Duration -->
+           
             <div class="field is-grouped">
               <div class="control is-expanded">
                 <label class="label" for="hours">Hours</label>
@@ -61,7 +60,7 @@
               </div>
             </div>
 
-            <!-- Distance -->
+            
             <div class="field">
               <label class="label" for="distance">Distance (km)</label>
               <div class="control">
@@ -69,7 +68,7 @@
               </div>
             </div>
 
-            <!-- Intensity -->
+           
             <div class="field">
               <label class="label" for="intensity">Intensity</label>
               <div class="control">
@@ -83,7 +82,7 @@
               </div>
             </div>
 
-            <!-- Notes -->
+            
             <div class="field">
               <label class="label" for="notes">Notes</label>
               <div class="control">
@@ -91,7 +90,7 @@
               </div>
             </div>
 
-            <!-- Submit -->
+           
             <div class="field has-text-centered mt-5">
               <button type="submit" class="button is-success is-medium has-text-weight-bold">Update Activity</button>
             </div>

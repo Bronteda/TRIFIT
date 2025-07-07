@@ -3,7 +3,6 @@ const router = express.Router();
 
 //import our models
 const Activity = require("../models/activity");
-const User = require("../models/user");
 
 //import our utils - helper functions
 const { getWeekDates, getActivitiesOnDate } = require("../utils/dateHelper");
@@ -43,15 +42,9 @@ router.get("/", async (req, res) => {
       owner: req.session.user._id,
     });
 
-
     const activitiesSorted = sortedActivities(activities);
 
-    //console.log(activitiesSorted);
-
     const currentWeekActivities = activitiesSorted.filter((activity) => {
-      // console.log("activity date",activity.date);
-      // console.log("monday",monday);
-      // console.log("sunday",sunday);
       return activity.date >= monday && activity.date <= sunday;
     });
 
@@ -63,7 +56,7 @@ router.get("/", async (req, res) => {
     const tuesdayActivities = getActivitiesOnDate(tuesday, activitiesSorted);
     const wednesdayActivities = getActivitiesOnDate(
       wednesday,
-      activitiesSorted
+      activitiesSorted,
     );
     const thursdayActivities = getActivitiesOnDate(thursday, activitiesSorted);
     const fridayActivities = getActivitiesOnDate(friday, activitiesSorted);
@@ -79,7 +72,6 @@ router.get("/", async (req, res) => {
       "Saturday",
       "Sunday",
     ];
-    console.log("Monday sending", monday);
 
     res.render("trainingPlan/index.ejs", {
       mondayActivities,

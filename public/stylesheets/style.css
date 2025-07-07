@@ -2,7 +2,7 @@
 body {
   background-color: #062942; /* Deep navy */
   font-family: "Poppins", sans-serif;
-   min-height: 100vh;
+  min-height: 100vh;
 }
 
 /* navbar styling */
@@ -37,7 +37,9 @@ body {
 /* acivities link styling */
 .activity-card-link {
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   display: block;
   border-radius: 8px;
 }
@@ -84,22 +86,20 @@ body {
 }
 
 /* Intensity level tags  */
-.low-tag{
-  color:white;
+.low-tag {
+  color: white;
   background-color: #10b981;
 }
 
-.moderate-tag{
-  color:white;
+.moderate-tag {
+  color: white;
   background-color: orange;
 }
 
-.vigorous-tag{
-  color:white;
+.vigorous-tag {
+  color: white;
   background-color: rgb(190, 61, 61);
 }
-
-
 
 /* mobile responsive */
 @media (max-width: 768px) {

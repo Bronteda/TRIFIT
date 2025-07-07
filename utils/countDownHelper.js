@@ -10,23 +10,28 @@ const countDown = (eventDate) => {
 
   if (difference > 0) {
     weeks = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
-    days = Math.floor((difference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
-    hours = Math.floor(((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) % 24);
-    minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60) );
+    days = Math.floor(
+      (difference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24),
+    );
+    hours = Math.floor(
+      ((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) % 24,
+    );
+    minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     seconds = Math.floor((difference % (1000 * 60)) / 1000);
   }
   //console.log(weeks, days, hours, minutes, seconds);
-  return {weeks, days, hours, minutes, seconds};
+  return { weeks, days, hours, minutes, seconds };
 };
 
-const raceDay = (eventDate) =>{
+const raceDay = (eventDate) => {
   const today = new Date();
-  if(eventDate.toISOString().slice(0, 10) === today.toISOString().slice(0, 10)){
+  if (
+    eventDate.toISOString().slice(0, 10) === today.toISOString().slice(0, 10)
+  ) {
     return true;
-  }else{
+  } else {
     return false;
   }
 };
 
-
-module.exports = { countDown, raceDay};
+module.exports = { countDown, raceDay };

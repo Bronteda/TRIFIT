@@ -43,6 +43,7 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 - 📊 Planned dashboard enhancements: charts, graphs, progress tracking
 
 ---
+
 ## 🧰 Helper Functions
 
 To keep my routes and views clean, I modularized key logic into helper files. This made the app easier to maintain, reuse, and scale.
@@ -104,17 +105,15 @@ Supports chart data and activity sorting.
   - Durations
   - Distances
   - Paces  
-  Used to build line graphs for a given activity type (`"run"`, `"swim"`, or `"cycle"`).
+    Used to build line graphs for a given activity type (`"run"`, `"swim"`, or `"cycle"`).
 
 ---
-
 
 ## What I learnt :
 
 ### 🔄 Sort and Filter Functions
 
 - Both are forms within EJS:
-
   - They are a GET form:
     ```html
     <form method="GET" action="/activities"></form>
@@ -155,12 +154,18 @@ const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
     return res.status(400).send("Distance must be a number bigger than 0");
   }
   ```
+
 ---
+
 ### Session-Based Authentication
 
 - I used `req.session.user._id` to securely associate activities and training plans with the currently logged-in user.
 
   ```js
   const user = req.session.user._id;
-This ensures each user can only access and modify their own data.
+  This ensures each user can only access and modify their own data.
+  ```
+
+```
+
 ```

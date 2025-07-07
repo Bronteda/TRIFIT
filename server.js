@@ -70,9 +70,8 @@ app.get("/", (req, res) => {
 app.use("/auth", authController);
 app.use(isSignedIn); //This means all the routes after isSignedIn require a signed-in user.
 app.use("/activities", activitiesController);
-app.use("/trainingPlan",trainingPlanController);
-app.use("/dashboard",dashboardController);
-
+app.use("/trainingPlan", trainingPlanController);
+app.use("/dashboard", dashboardController);
 
 //--Start Server--
 connectDB().then(() => {

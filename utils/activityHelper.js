@@ -63,9 +63,10 @@ const getInfoLineGraphs = async (activities, type) => {
   if (type === "swim") {
     activities.forEach((activity) => {
       // console.log("activity complted ",activity.complete , activity )
-      if (activity.completed) { //checking if activity completed
+      if (activity.completed) {
+        //checking if activity completed
         activityPaces.push(
-          activity.duration / ((activity.distance * 1000) / 100)
+          activity.duration / ((activity.distance * 1000) / 100),
         );
         activityDates.push(activity.date.toISOString().slice(0, 10));
         activityDuration.push(activity.duration);

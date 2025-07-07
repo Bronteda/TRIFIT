@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/png" href="/images/trifit-logo.png" />
     <title>Add Activity</title>
   </head>
   <body>
@@ -23,7 +24,6 @@
           <h1 class="title is-3 has-text-centered">Add a New Activity</h1>
 
           <form action="/activities" method="POST">
-            <!-- Completed -->
             <div class="field">
               <label class="label">Completed</label>
               <label class="switch is-rounded">
@@ -31,7 +31,6 @@
                 <span class="check"></span>
               </label>
             </div>
-            <!-- Date -->
             <div class="field">
               <label class="label" for="date">Date</label>
               <div class="control">
@@ -46,7 +45,6 @@
                 />
               </div>
             </div>
-            <!-- Activity Type-->
             <div class="field">
               <label class="label" for="activity">Activity Type</label>
               <div class="control">
@@ -59,7 +57,6 @@
                 </div>
               </div>
             </div>
-            <!-- Duration -->
             <div class="field is-grouped">
               <div class="control is-expanded">
                 <label class="label" for="hours">Hours</label>
@@ -84,7 +81,6 @@
                 />
               </div>
             </div>
-            <!-- Distance -->
             <div class="field">
               <label class="label" for="distance">Distance (km)</label>
               <div class="control">
@@ -99,7 +95,6 @@
                 />
               </div>
             </div>
-            <!-- Intensity -->
             <div class="field">
               <label class="label" for="intensity">Intensity</label>
               <div class="control">
@@ -112,7 +107,6 @@
                 </div>
               </div>
             </div>
-            <!-- Notes -->
             <div class="field">
               <label class="label" for="notes">Notes</label>
               <div class="control">

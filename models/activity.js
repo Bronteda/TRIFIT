@@ -9,8 +9,8 @@ const activitySchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
   date: {
     type: Date,
-    required:true,
-    default: Date.now, // set default 
+    required: true,
+    default: Date.now, // set default
   },
   activity: {
     type: String,
