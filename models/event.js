@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema({
     required: true,
     ref: "User",
   },
-  name: { type: String, require: true, unique: true },
+  name: { type: String, required: true},
   date: { type: Date, required: true, default: Date.now }, // set default
   estimateTime: { type: Number },
 });

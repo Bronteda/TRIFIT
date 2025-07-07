@@ -98,7 +98,9 @@ router.get("/", async (req, res) => {
 
 //Add an event GET route
 router.get("/event/new", (req, res) => {
-  res.render("dashboard/events/new.ejs");
+  //Gets todays date so we can set a minimum value for date selector
+  const today = new Date().toISOString().split("T")[0];
+  res.render("dashboard/events/new.ejs", {today});
 });
 
 //Add new event to mongodb POST
@@ -126,6 +128,7 @@ router.post("/event", async (req, res) => {
     //add event to training calendar
     const newRaceDayActivity = new Activity({
       owner: req.session.user._id,
+      event: newEvent._id,
       date: req.body.date || new Date(), // default to today if not set
       activity: "Race",
     });

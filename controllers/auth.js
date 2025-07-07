@@ -22,7 +22,7 @@ router.post("/sign-up", async (req, res) => {
     //check if user already exists
     const userInDatabase = await User.findOne({ username: req.body.username });
     if (userInDatabase) {
-      return res.send("User already exists, Please go to Sign in page");
+      return res.redirect("/auth/sign-in?flag=true");
     }
 
     //Password matches confirm password
@@ -48,6 +48,7 @@ router.post("/sign-up", async (req, res) => {
 router.get("/sign-in", (req, res) => {
   res.render("auth/sign-in.ejs", {
     newUser: req.query.newUser || false,
+    flag: req.query.flag || false,
     user: req.user || null,
   });
 });

@@ -26,7 +26,7 @@
             <div class="field">
               <label class="label" for="name">Event Name:</label>
               <div class="control">
-                <input class="input" type="text" name="name" id="name" />
+                <input class="input" type="text" name="name" id="name" required />
               </div>
             </div>
 
@@ -38,7 +38,7 @@
                   type="date"
                   id="date"
                   name="date"
-                  min="2020-01-01"
+                  min=<%=today%>
                   max="2100-12-31"
                   required
                 />

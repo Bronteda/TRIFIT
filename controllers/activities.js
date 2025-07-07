@@ -29,8 +29,11 @@ router.get("/", async (req, res) => {
     case "Swim":
       filter1 = "Swim";
       break;
+    case "Race":
+      filter1 = "Race";
+      break;
     case "All":
-      filter1 = ["Run", "Swim", "Cycle"];
+      filter1 = ["Run", "Swim", "Cycle"]; //I chose not to add race here because these are based off activities not races 
       break;
     default:
       filter1 = ["Run", "Swim", "Cycle"];

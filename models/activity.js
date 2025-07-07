@@ -6,6 +6,10 @@ const activitySchema = new mongoose.Schema({
     required: true,
     ref: "User", //A reference to the User model.
   },
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Event", //A reference to the Event model when saving race activities
+  },
   completed: { type: Boolean, default: false },
   date: {
     type: Date,
