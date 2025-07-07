@@ -43,6 +43,71 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 - 📊 Planned dashboard enhancements: charts, graphs, progress tracking
 
 ---
+## 🧰 Helper Functions
+
+To keep my routes and views clean, I modularized key logic into helper files. This made the app easier to maintain, reuse, and scale.
+
+---
+
+### 📏 `format-duration.js`
+
+Handles all formatting and parsing of time durations.
+
+- `totalMinutesCalculated(hours, minutes)`  
+  Converts separate hour and minute inputs into total minutes (used for saving to the database).
+
+- `separateDuration(totalMinutes)`  
+  Converts total minutes back into hours + minutes (used in edit forms).
+
+- `formatDuration(totalMinutes)`  
+  Converts total minutes into a readable string like `"1 hr 45 min"` or `"15 min"`.
+
+---
+
+### 📅 `dateHelper.js`
+
+Provides week-based calendar date logic.
+
+- `getWeekDates(todayDate)`  
+  Calculates the Monday-to-Sunday dates for the week of a given date. Useful for building training plan calendars.
+
+- `getActivitiesOnDate(day, activities)`  
+  Filters a list of activities to return only those that match a given day (by ISO date string).
+
+---
+
+### ⏳ `countDownHelper.js`
+
+Used for event countdown and race day logic.
+
+- `countDown(eventDate)`  
+  Calculates how many **weeks, days, hours, minutes, and seconds** remain until a target event date.
+
+- `raceDay(eventDate)`  
+  Returns `true` if today matches the event date (`YYYY-MM-DD`), `false` otherwise.
+
+---
+
+### 🏃 `activityHelper.js`
+
+Supports chart data and activity sorting.
+
+- `sortedActivities(activities)`  
+  Sorts activities by date, from newest to oldest.
+
+- `getTotalMinutesSpendOnActivity(user)`  
+  Returns total minutes spent on each activity type (run, swim, cycle). Used for pie chart breakdowns.
+
+- `getInfoLineGraphs(activities, type)`  
+  Generates arrays of:
+  - Dates
+  - Durations
+  - Distances
+  - Paces  
+  Used to build line graphs for a given activity type (`"run"`, `"swim"`, or `"cycle"`).
+
+---
+
 
 ## What I learnt :
 
