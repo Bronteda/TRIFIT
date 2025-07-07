@@ -44,7 +44,7 @@ body {
 
 .activity-card-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgb(236, 244, 12);
 }
 
 /* Switch Styling - for completed toggle*/

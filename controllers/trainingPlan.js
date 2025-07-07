@@ -43,11 +43,6 @@ router.get("/", async (req, res) => {
       owner: req.session.user._id,
     });
 
-    // const activitiesSorted = activities.sort((a, b) => {
-    //   const dateA = new Date(a.date);
-    //   const dateB = new Date(b.date);
-    //   return dateA - dateB;
-    // });
 
     const activitiesSorted = sortedActivities(activities);
 

@@ -1,8 +1,52 @@
-# TRIFIT
+<p align="center">
+  <img src="https://your-logo-url-here.com/trifit-logo.png" alt="TriFit Logo" width="300"/>
+</p>
 
-What I learnt :
+<h1 align="center">TriFit 🏃‍♀️🚴‍♂️🏊</h1>
 
-Sort and Filter functons
+<p align="center">
+  Your ultimate training companion for tracking triathlon progress, weekly plans, and upcoming events — all in one app.
+</p>
+
+---
+
+## 📋 Overview
+
+TriFit is a full-stack web application designed to help triathletes and fitness enthusiasts:
+
+- Log and manage activities (Swim, Cycle, Run)
+- Create structured weekly training plans
+- Track upcoming races and events
+- Monitor performance and completion stats
+
+Built with a clean Bulma UI, this app keeps your training journey simple and motivating.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** Node.js, Express.js
+- **Frontend:** EJS, Bulma CSS
+- **Database:** MongoDB with Mongoose ODM
+- **Authentication:** Express-session
+- **Templating:** EJS partials and layout reuse
+- **Utilities:** Custom helper functions for time formatting and validation
+
+---
+
+## ✨ Features
+
+- 🏃 Activity Tracking (distance, duration, intensity, notes)
+- 📅 Weekly Training Plan (auto-structured by weekdays)
+- 📌 Race/Event Countdown with time estimation
+- ✅ Activity completion status toggle
+- 📊 Planned dashboard enhancements: charts, graphs, progress tracking
+
+---
+
+## What I learnt :
+
+### Sort and Filter functons
 
 - Both are forms within EJS
   - They are a Get form - <form method="GET" action="/activities">
@@ -12,7 +56,7 @@ Sort and Filter functons
     - Each <select name="..."> provides a key-value pair for the query string.
 - When you hit submit - /activities?activity=Cycle&sort=newest
 
-Adding a property to an Object dynamically 
+### Adding a property to an Object dynamically 
 
 const activityQuery = req.query.activity || "all";
 const filter = {};
@@ -27,7 +71,7 @@ If the query string is ?activity=Cycle, then:
 
 Now filter becomes: { activity: 'Cycle' }
 
-Build the “real” dates for each column of your calendar so you can display, say, “Mon Apr 14,” “Tue Apr 15,” … “Sun Apr 20” instead of just the names Monday–Sunday. 
+### Build the “real” dates for each column of your calendar so you can display, say, “Mon Apr 14,” “Tue Apr 15,” … “Sun Apr 20” instead of just the names Monday–Sunday. 
 
 const weekDates = Array.from({ length: 7 }, (_, i) => {
   // 1. Make a fresh Date object that starts out equal to Monday:
@@ -48,21 +92,8 @@ Creates an array of length 7.
 For each index i from 0 to 6, it clones the Monday date and adds i days.
 You end up with a weekDates array like:[ Mon Apr 14 2025,  Tue Apr 15 2025, …, Sun Apr 20 2025 ]
 
-* nav in the training plan section
-nav: {
-  prev: prev.toISOString().slice(0,10),  // "YYYY-MM-DD"
-  next: next.toISOString().slice(0,10),
-}
 
+### toISOString()
 toISOString()- takes a Date and makes it a string 
 we then slice it to only take first 10 characters 
 e.g. 2025-04-14
-
-We use this in our template to go to the previous week and the future week e.g. <a href="?start=<%= nav.prev %>">← Previous Week</a>
-and because nav.prev is "2025-04-14", clicking it loads /trainingPlan?start=2025-04-07 (i.e. one week earlier).
-Which then calls the index page again but with a req.query attached:
- // 1. Decide which week to show:
-    //    - If the URL has ?start=2025-04-14, use that date
-    //    - Otherwise default to today
-    const startParam = req.query.start; // e.g. "2025-04-14"
-    const baseDate = startParam ? new Date(startParam) : new Date();
