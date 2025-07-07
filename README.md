@@ -70,5 +70,33 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 const date = new Date();
 const shortDate = date.toISOString().slice(0, 10); // "2025-04-14"
 
+---
+### 🔐 Session-Based Authentication
+
+- I used `req.session.user._id` to securely associate activities and training plans with the currently logged-in user.
+
+  ```js
+  const user = req.session.user._id;
+This ensures each user can only access and modify their own data.
+
+---
+
+```
+### 🧼 Form Validation & Data Sanitization
+
+- I validated user input before saving it to the database:
+
+  ```js
+  if (isNaN(duration) || duration < 0) {
+    return res.status(400).send("Duration must be a number bigger than 0");
+  }
+
+  const distance = parseFloat(req.body.distance);
+  if (isNaN(distance) || distance < 0) {
+    return res.status(400).send("Distance must be a number bigger than 0");
+  }
+
+
+
 
 
