@@ -33,6 +33,10 @@ Built with a clean Bulma UI, this app keeps your training journey simple and mot
 - **Utilities:** Custom helper functions for time formatting and validation
 
 ---
+## Planning Material
+- **https://docs.google.com/document/d/1xGq_uY-6fRVHlCOVJemjR7SsG6RNt-2udNN-MCuBBOs/edit?usp=drive_link**
+
+---
 
 ## ✨ Features
 
