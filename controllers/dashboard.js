@@ -101,7 +101,7 @@ router.get("/", async (req, res) => {
 router.get("/event/new", (req, res) => {
   //Gets todays date so we can set a minimum value for date selector
   const today = new Date().toISOString().split("T")[0];
-  res.render("dashboard/events/new.ejs", {today});
+  res.render("dashboard/events/new.ejs", { today });
 });
 
 //Add new event to mongodb POST
@@ -187,8 +187,8 @@ router.put("/event/:eventId", async (req, res) => {
 router.delete("/event/:eventId", async (req, res) => {
   try {
     //this should delete the race event activity
-    await Activity.deleteOne({event:req.params.eventId});
-    //this should delete the event 
+    await Activity.deleteOne({ event: req.params.eventId });
+    //this should delete the event
     await Event.findByIdAndDelete(req.params.eventId);
     res.redirect("/dashboard");
   } catch (e) {
