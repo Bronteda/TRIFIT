@@ -74,6 +74,7 @@ router.get("/", async (req, res) => {
 
     //console.log(runDates, runDurations, runDistances, "paces",runPaces);
     res.render("dashboard/index.ejs", {
+      user,
       userEvents,
       yValuesPie,
       barColors,
@@ -185,6 +186,9 @@ router.put("/event/:eventId", async (req, res) => {
 //Delete event
 router.delete("/event/:eventId", async (req, res) => {
   try {
+    //this should delete the race event activity
+    await Activity.deleteOne({event:req.params.eventId});
+    //this should delete the event 
     await Event.findByIdAndDelete(req.params.eventId);
     res.redirect("/dashboard");
   } catch (e) {

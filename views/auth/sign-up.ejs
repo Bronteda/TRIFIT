@@ -30,6 +30,12 @@
                 Join TRIFIT
               </h1>
 
+               <% if (notMatching) { %>
+              <div class="notification is-danger is-light">
+                ❌ Password and confirmed password do not match. 
+              </div>
+              <% } %>
+
               <form action="/auth/sign-up" method="POST">
                 <div class="field">
                   <label class="label" for="email">Email Address</label>

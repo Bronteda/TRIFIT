@@ -42,6 +42,13 @@
               </div>
               <% } %>
 
+              
+              <% if (failed) { %>
+              <div class="notification is-danger is-light">
+                ❌ Login failed. Please try again. 
+              </div>
+              <% } %>
+
 
               <form action="/auth/sign-in" method="POST">
                 <div class="field">

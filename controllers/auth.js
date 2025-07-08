@@ -13,6 +13,7 @@ router.use(passUserToView);
 router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs", {
     user: req.user || null,
+    notMatching: req.query.notMatching || null,
   });
 });
 
@@ -27,7 +28,7 @@ router.post("/sign-up", async (req, res) => {
 
     //Password matches confirm password
     if (req.body.password !== req.body.confirmPassword) {
-      return res.send("Password and confirm password do not match");
+      return res.redirect("/auth/sign-up?notMatching=true");
     }
 
     //encrypt password
@@ -50,6 +51,7 @@ router.get("/sign-in", (req, res) => {
     newUser: req.query.newUser || false,
     flag: req.query.flag || false,
     user: req.user || null,
+    failed: req.query.failed || false,
   });
 });
 
@@ -59,7 +61,7 @@ router.post("/sign-in", async (req, res) => {
     //check user exists in db
     const userInDatabase = await User.findOne({ username: req.body.username });
     if (!userInDatabase) {
-      return res.send("Login failed. Please try again.");
+      return res.redirect("/auth/sign-in?failed=true");
     }
 
     //check if the password is correct
@@ -69,7 +71,7 @@ router.post("/sign-in", async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.send("Login failed. Please try again.");
+      return res.redirect("/auth/sign-in?failed=true");
     }
 
     // There is a user AND they had the correct password. Time to make a session!
