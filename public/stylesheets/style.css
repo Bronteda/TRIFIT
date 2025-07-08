@@ -34,12 +34,15 @@ body {
   letter-spacing: 0.5px;
 }
 
+.frontPage {
+  max-width: 600px;
+  width: 100%;
+}
+
 /* acivities link styling */
 .activity-card-link {
   text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: block;
   border-radius: 8px;
 }
