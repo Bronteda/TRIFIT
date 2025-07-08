@@ -30,7 +30,7 @@
           <div class="column is-4 has-text-left">
             <a
               class="button is-success is-medium has-text-weight-bold"
-              href="/activities/new"
+              href="/activities/new?redirect=activities"
             >
               + Add Activity
             </a>
@@ -74,7 +74,7 @@
           <% activities.forEach(activity => { %>
           <div class="column is-4 ">
             <a
-              href="/activities/<%= activity._id %>"
+              href="/activities/<%= activity._id %>?redirect=activities"
               class="card has-background-white-ter has-text-black activity-card-link"
             >
               <div class="card-content">

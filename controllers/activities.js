@@ -67,7 +67,8 @@ router.get("/", async (req, res) => {
 
 //Adding a new Activity GET
 router.get("/new", (req, res) => {
-  res.render("activities/new.ejs");
+  const redirect = req.query.redirect || "/activities";
+  res.render("activities/new.ejs", { redirect });
 });
 
 //Add the new activity to the db POST
@@ -107,7 +108,11 @@ router.post("/", async (req, res) => {
 
     await newActivity.save();
 
-    res.redirect("/activities");
+    if (req.body.redirect === "trainingPlan") {
+      res.redirect("/trainingPlan");
+    } else {
+      res.redirect("/activities");
+    }
   } catch (e) {
     console.log("Couldn't add the activity to the DB", e);
     res.status(500).send("Couldn't add activity");
@@ -116,10 +121,11 @@ router.post("/", async (req, res) => {
 
 //show page for each activity
 router.get("/:activityId", async (req, res) => {
+  const redirect = req.query.redirect || "/activities";
   const activity = await Activity.findById(req.params.activityId);
   const duration = formatDuration(activity.duration);
 
-  res.render("activities/show.ejs", { activity, duration });
+  res.render("activities/show.ejs", { activity, duration, redirect });
 });
 
 //Get router for edit
@@ -186,7 +192,12 @@ router.put("/:activityId", async (req, res) => {
 router.delete("/:activityId", async (req, res) => {
   try {
     await Activity.findByIdAndDelete(req.params.activityId);
-    res.redirect("/activities");
+
+    if (req.body.redirect === "trainingPlan") {
+      res.redirect("/trainingPlan");
+    } else {
+      res.redirect("/activities");
+    }
   } catch (e) {
     console.log("Cannot delete activity", e);
     res.status(500).send("Cannot delete activity");

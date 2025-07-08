@@ -22,7 +22,9 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-8-tablet is-6-desktop">
-            <div class="card has-background-white-ter has-text-black has-text-centered p-5">
+            <div
+              class="card has-background-white-ter has-text-black has-text-centered p-5"
+            >
               <h1 class="title is-3 has-text-black mb-3">
                 <% if (activity.activity === 'Swim') { %>🏊<% } else if
                 (activity.activity === 'Cycle') { %>🚴<% } else if
@@ -37,23 +39,19 @@
                   activity.date.toDateString ? activity.date.toDateString() :
                   activity.date %>
                 </p>
-                <% } %>
-
-                
-                 <% if(activity.duration){ %>
-                  <p>
-                    <span class="has-text-weight-semibold .is-size-1">Duration:</span>
-                    <%= duration %>
-                  </p>
-                <% } %>
-              
-                <% if (activity.distance) { %>
+                <% } %> <% if(activity.duration){ %>
+                <p>
+                  <span class="has-text-weight-semibold .is-size-1"
+                    >Duration:</span
+                  >
+                  <%= duration %>
+                </p>
+                <% } %> <% if (activity.distance) { %>
                 <p>
                   <span class="has-text-weight-semibold">Distance:</span> <%=
                   activity.distance %> km
                 </p>
-                <% } %> 
-                <% if (activity.intensity) { %>
+                <% } %> <% if (activity.intensity) { %>
                 <p>
                   <span class="has-text-weight-semibold">Intensity:</span>
                   <span
@@ -74,31 +72,40 @@
                   <% if (activity.completed) { %>
                   <span class="tag is-success is-light ml-2">✅ Completed</span>
                   <% } else { %>
-                  <span class="tag is-warning is-light ml-2">⏳ Not Completed</span>
+                  <span class="tag is-warning is-light ml-2"
+                    >⏳ Not Completed</span
+                  >
                   <% } %>
                 </p>
               </div>
 
               <div class="buttons mt-5 is-centered">
-               <% if(activity.activity === 'Race' && activity.event){ %>
-                   <a
+                <% if(activity.activity === 'Race' && activity.event){ %>
+                <a
                   class="button is-info has-text-weight-bold"
                   href="/dashboard/event/<%= activity.event %>"
-                  >Edit Activity</a>
+                  >Edit Activity</a
+                >
 
                 <% } else { %>
-                   <a
+                <a
                   class="button is-info has-text-weight-bold"
                   href="/activities/<%= activity._id %>/edit"
-                  >Edit Activity</a>
+                  >Edit Activity</a
+                >
 
-               <% } %>
+                <% } %>
 
-                 <form
+                <form
                   action="/activities/<%= activity._id %>?_method=DELETE"
                   method="POST"
                   style="display: inline"
                 >
+                  <input
+                    type="hidden"
+                    name="redirect"
+                    value="<%= redirect %>"
+                  />
                   <button
                     type="submit"
                     class="button is-danger has-text-weight-bold"

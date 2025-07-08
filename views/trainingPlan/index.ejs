@@ -36,7 +36,7 @@
           <div class="column is-narrow">
             <a
               class="button is-success has-text-weight-bold has-text-dark"
-              href="/activities/new"
+              href="/activities/new?redirect=trainingPlan"
             >
               + Add Activity
             </a>
@@ -96,7 +96,7 @@
 
             <% if (activities.length > 0) { %> <%
             activities.forEach(activity => { %>
-            <a href="/activities/<%=activity._id%>">
+            <a href="/activities/<%=activity._id%>?redirect=trainingPlan">
               <div
                 class="card <%= activity.completed ? 'has-background-success-light' : 'has-background-white' %> <%= activity.activity === 'Race' ? 'has-background-warning' : 'has-background-white' %> mb-4"
               >

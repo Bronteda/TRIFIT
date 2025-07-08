@@ -24,6 +24,7 @@
           <h1 class="title is-3 has-text-centered">Add a New Activity</h1>
 
           <form action="/activities" method="POST">
+            <input type="hidden" name="redirect" value="<%= redirect %>">
             <div class="field">
               <label class="label">Completed</label>
               <label class="switch is-rounded">
