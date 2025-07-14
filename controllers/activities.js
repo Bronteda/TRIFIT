@@ -86,10 +86,12 @@ router.post("/", async (req, res) => {
     }
 
     //Distance
-    const distance = parseFloat(req.body.distance);
+    let distance = parseFloat(req.body.distance);
+    console.log(distance);
     if (isNaN(distance) || distance < 0) {
       //handle invalid input
-      return res.status(400).send("Distance must be a number bigger than 0");
+      //return res.status(400).send("Distance must be a number bigger than 0");
+      distance = 0 ; 
     }
 
     //completed parsed correctly - check box
@@ -145,7 +147,7 @@ router.get("/:activityId/edit", async (req, res) => {
 router.put("/:activityId", async (req, res) => {
   try {
     const currentActivity = await Activity.findById(req.params.activityId);
-    //console.log(currentActivity);
+    console.log(currentActivity);
 
     //get user id
     const user = req.session.user._id;
@@ -159,10 +161,11 @@ router.put("/:activityId", async (req, res) => {
     }
 
     //Distance
-    const distance = parseFloat(req.body.distance);
+    let distance = parseFloat(req.body.distance);
     if (isNaN(distance) || distance < 0) {
       //handle invalid input
-      return res.status(400).send("Distance must be a number bigger than 0");
+     // return res.status(400).send("Distance must be a number bigger than 0");
+      distance = 0 ; 
     }
 
     //completed parsed correctly - check box
